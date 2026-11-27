@@ -38,6 +38,7 @@ ASSETS = (
     "aral-markup-footer-links.js",
     "aral-pds-publication-r7.js",
     "aral-r12-design.css",
+    "aral-purchase-r12.js",
     "contact-max-chat-r12.svg",
     "contact-vk-r12.svg",
     "contact-whatsapp-r12.svg",

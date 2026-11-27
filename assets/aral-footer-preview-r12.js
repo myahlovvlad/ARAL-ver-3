@@ -1,24 +1,43 @@
-/* Shared ARAL footer preview. Existing 7 source pages remain untouched. */
-(()=>{'use strict';
- if(window.ARALFooterPreview?.installed)return;
- const base=document.currentScript?.dataset.siteRoot||'';
- const pages={
-  HOME:'design/hero/prototypes/hero-4s-k-views/ARAL_home_contour_2A_footer_preview.html',
-  COMPANY:'index-footer-preview.html#company',
-  CATALOG:'pages/products-r15-contour-2A-footer-preview.html#/catalog',
-  DRIVERS:'pages/drivers-08-footer-preview.html',
-  PARTNERS:'pages/partners-11-footer-preview.html',
-  ADVANTAGES:'pages/advantages-04-footer-preview.html',
-  INTERESTING:'index-footer-preview.html#interesting',
-  CONTACTS:'pages/contacts-03-footer-preview.html'
- };
- let markup="<div class=\"af-inner\"><div class=\"af-layout\">\n<section aria-label=\"О бренде ARAL\"><div class=\"af-identity\"><span class=\"af-diamond\" aria-hidden=\"true\"><span>ARAL</span></span><strong class=\"af-wordmark\">ARAL</strong></div>\n<p class=\"af-kicker\">Немецкая история · с 1898 года</p>\n<p class=\"af-claim\">Подбор масла и поставки ARAL</p>\n<p class=\"af-lead\">ARAL — моторные масла и технические жидкости. <a href=\"https://www.aral.de/de/global/retail/ueber-aral/wer-wir-sind.html\" target=\"_blank\" rel=\"noopener noreferrer\">Об известности бренда</a></p></section>\n<nav aria-label=\"Разделы сайта\" class=\"af-nav\"><h2 class=\"af-title\">Разделы</h2><div class=\"af-links\">\n<a href=\"@@HOME@@\">Главная</a><a href=\"@@COMPANY@@\">О бренде</a><a href=\"@@CATALOG@@\">Продукция ARAL</a>\n<a href=\"@@DRIVERS@@\">Для водителей</a><a href=\"@@PARTNERS@@\">Для партнёров</a>\n<a href=\"@@ADVANTAGES@@\">Преимущества</a><a href=\"@@CONTACTS@@\">Где купить</a></div></nav>\n<section aria-label=\"Материалы и анонсы\"><h2 class=\"af-title\">Материалы и анонсы</h2><div class=\"af-news\">\n<a class=\"af-teaser\" href=\"@@INTERESTING@@\"><small>Интересное</small><span>5W-30 или 5W-40: в чём разница?</span></a>\n<a class=\"af-teaser\" href=\"@@CATALOG@@\"><small>Продукция</small><span>Ассортимент, характеристики и фасовки масел ARAL</span></a>\n<a class=\"af-teaser\" href=\"https://msdspds.aral.com/\" target=\"_blank\" rel=\"noopener noreferrer\"><small>Техническая информация</small><span>Документация на продукцию PDS / SDS</span></a>\n</div></section>\n<section aria-label=\"Контактные данные\"><h2 class=\"af-title\">Контакты и сотрудничество</h2><div class=\"af-contact\">\n<p class=\"aral-importer-label\">Импортёр ARAL в России</p><div class=\"aral-footer-phones\"><a href=\"tel:+79646401235\">+7 (964) 640-12-35</a><a href=\"tel:+74951011235\">+7 (495) 101-12-35</a></div><div class=\"aral-contact-channels\"><button class=\"aral-max-button\" type=\"button\" data-max-phone=\"+79646401235\" aria-label=\"MAX — скопировать номер +7 (964) 640-12-35\">MAX</button><a href=\"https://wa.me/79646401235\" target=\"_blank\" rel=\"noopener noreferrer\">WhatsApp</a><a href=\"https://vk.ru/spkoils\" target=\"_blank\" rel=\"noopener noreferrer\">ВКонтакте</a></div><p class=\"aral-max-note\">MAX: +7 (964) 640-12-35 · нажмите MAX, чтобы скопировать номер</p><a href=\"@@CONTACTS@@\">Магазины и точки продаж</a>\n<a class=\"af-cta\" href=\"@@PARTNERS@@\">Для партнёров <span aria-hidden=\"true\">↗</span></a>\n</div></section></div>\n<div class=\"af-bottom\"><a href=\"@@CONTACTS@@\">Адреса и контакты</a></div></div>";
- for(const [key,path] of Object.entries(pages))markup=markup.replaceAll('@@'+key+'@@',base+path);
- const footers=[...document.querySelectorAll('footer')];
- for(const el of footers){
-  el.className='aral-global-footer';
-  el.setAttribute('aria-label','Подвал сайта ARAL');
-  el.innerHTML=markup;
- }
- window.ARALFooterPreview=Object.freeze({installed:true,footers:footers.length});
+(() => {
+  const base = new URL(document.currentScript.dataset.siteRoot || './', document.baseURI);
+  const root = path => new URL(path, base).href;
+  const contacts = 'pages/contacts-employer-feedback-r12-preview.html';
+  const brand = 'index-employer-feedback-r12-preview.html';
+  const markup = `<div class="af-inner">
+    <div class="af-layout">
+      <section aria-label="Продукция и документы">
+        <a class="af-identity" href="${root('index.html')}" aria-label="ARAL — на главную">
+          <img src="${root('assets/aral-logo-header-r9.svg')}" width="52" height="52" alt="ARAL">
+        </a>
+        <h2 class="af-title">Продукция и документы</h2>
+        <div class="af-links">
+          <a href="${root('pages/products-employer-feedback-r12-preview.html#/catalog')}">Продукция</a>
+          <a href="https://msdspds.aral.com/" target="_blank" rel="noopener noreferrer">Паспорта PDS и SDS ↗</a>
+        </div>
+      </section>
+      <nav aria-label="Покупка и поставки">
+        <h2 class="af-title">Покупка и поставки</h2>
+        <div class="af-links">
+          <a href="${root(contacts + '#contacts-stores')}">Где купить</a>
+          <a href="${root('pages/partners-employer-feedback-r12-preview.html')}">Сотрудничество</a>
+          <a href="${root(contacts + '#contacts-wholesale')}">Отдел продаж</a>
+        </div>
+      </nav>
+      <nav aria-label="О бренде">
+        <h2 class="af-title">ARAL</h2>
+        <div class="af-links">
+          <a href="${root(brand + '#company')}">О бренде</a>
+          <a href="${root('pages/advantages-employer-feedback-r12-preview.html')}">Преимущества ARAL</a>
+          <a href="${root('pages/drivers-employer-feedback-r12-preview.html')}">Для водителей</a>
+          <a href="${root(brand + '#interesting')}">Интересное</a>
+        </div>
+      </nav>
+    </div>
+  </div>`;
+
+  for (const footer of document.querySelectorAll('footer')) {
+    footer.className = 'aral-global-footer';
+    footer.setAttribute('aria-label', 'Подвал сайта ARAL');
+    footer.innerHTML = markup;
+  }
 })();

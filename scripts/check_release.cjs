@@ -73,6 +73,9 @@ async function run() {
 
       await visit('', '#home-page');
       await page.waitForURL(url(home).href);
+      const quote = page.getByRole('link', { name: 'Запросить условия поставки', exact: true });
+      assert.ok((await quote.boundingBox()).y < 900);
+      assert.match(await quote.getAttribute('href'), /#contacts-wholesale$/);
       await visit('index.html#interesting', '#view-interesting.is-active');
       await visit('pages/products-r15.html#/product/ARAL-013', '.product-detail');
       await page.waitForURL(url(catalog + '#/product/ARAL-013').href);
@@ -80,6 +83,22 @@ async function run() {
       const variant = page.locator('.variant[data-variant]').nth(1);
       await variant.click();
       assert.match(await variant.getAttribute('class'), /\bactive\b/);
+      assert.equal(await variant.innerText(), '20 л');
+      const retailUrl = await page.locator('#retailPurchase').getAttribute('href');
+      assert.match(retailUrl, /sku=13932#contacts-stores$/);
+      await page.locator('#bizPurchase').click();
+      await page.waitForURL(/sku=13932#contacts-wholesale$/);
+      await page.waitForFunction(() => document.querySelector('#aral-order-form textarea').value.includes('13932'));
+      await page.getByLabel('Количество упаковок').fill('4');
+      await page.getByLabel('Город поставки').fill('Ногинск');
+      const draft = await page.getByLabel('Текст запроса').inputValue();
+      assert.match(draft, /Aral MegaTurboral 10W-40 · 20 л · артикул 13932/);
+      assert.match(draft, /Количество упаковок: 4/);
+      assert.match(draft, /Город поставки: Ногинск/);
+      const whatsApp = new URL(await page.locator('#aral-order-whatsapp').getAttribute('href'));
+      assert.equal(whatsApp.searchParams.get('text'), draft);
+      await visit('pages/' + retailUrl, '#contacts-stores .cc-search');
+      await page.waitForFunction(() => document.querySelector('#contacts-stores [data-order-context]').textContent.includes('13932'));
 
       for (const [id, filename] of [
         ['ARAL-008', 'ARAL-008_2025-06-02_EN.pdf'],
@@ -107,7 +126,7 @@ async function run() {
       await page.goBack();
       await page.waitForURL(url(catalog + '#/catalog').href);
       await page.waitForFunction(() => scrollY === 0);
-      const card = page.locator('#assortment .product-card').nth(7);
+      const card = page.locator('#assortment .product-card h3 a').nth(7);
       await card.scrollIntoViewIfNeeded();
       await card.focus();
       const beforeProduct = await page.evaluate(() => scrollY);
@@ -174,6 +193,16 @@ async function run() {
       const region = page.locator('#contacts-stores .cc-tab').nth(1);
       await region.click();
       assert.equal(await region.getAttribute('aria-pressed'), 'true');
+      await page.locator('.cc-result').nth(1).click();
+      assert.equal(await page.locator('.cc-detail a[href^="tel:"]').first().isVisible(), true);
+      if (width === 390) {
+        assert.equal(await page.locator('.cc-detail h3').evaluate(title => title === document.activeElement), true);
+        assert.ok(await page.locator('.cc-detail').evaluate(detail => detail.getBoundingClientRect().top >= 82 && detail.getBoundingClientRect().top <= 180));
+      }
+      await page.locator('.cc-search').fill('неттакогомагазина');
+      await page.getByRole('button', { name: 'Сбросить поиск' }).click();
+      assert.equal(await page.locator('.cc-search').inputValue(), '');
+      assert.equal(await page.locator('.cc-result').count(), 35);
       assert.deepEqual(errors, []);
       console.log('R12 release routes and interactions passed at width ' + width);
       await page.close();

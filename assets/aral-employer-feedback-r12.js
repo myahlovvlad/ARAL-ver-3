@@ -216,53 +216,7 @@
   btn.addEventListener('click',()=>update(!document.body.classList.contains('aral-review-links-on')));
   update(new URLSearchParams(location.search).get('review')==='links');
  }
- function setDotLink(el){
-  if(!el||el.classList.contains('aral-r3-dot-link'))return;
-  el.classList.add('aral-r3-dot-link');
-  el.querySelectorAll('[aria-hidden="true"]').forEach(n=>{if(n.textContent?.trim()==='↗')n.remove()});
-  const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);
-  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
-  for(const n of nodes){if(n.nodeValue?.includes('↗'))n.nodeValue=n.nodeValue.replace(/\s*↗/g,'')}
- }
- function applyR9ContentReview(){
-  document.querySelectorAll('#audiences .card-link-label').forEach(setDotLink);
-  for(const foot of document.querySelectorAll('.aral-global-footer')){
-   const lead=foot.querySelector('.af-lead');
-   if(lead){const link=lead.querySelector('a');if(link){lead.replaceChildren(link);setDotLink(link)}}
-   // Retain all original editorial teasers: Интересное, Каталог, Техническая информация (PDS / SDS).
-   foot.querySelectorAll('.af-news .af-teaser').forEach(link=>link.classList.remove('aral-r3-dot-link'));
-   const contact=foot.querySelector('.af-contact');
-   const partner=contact?.querySelector('a.af-cta:not(.aral-r9-driver-cta)');
-   if(partner){
-    partner.classList.remove('aral-r3-dot-link');
-    partner.textContent='Для партнёров';
-    partner.classList.add('aral-r9-footer-cta');
-    partner.setAttribute('data-magnetic','footer-partners');
-    let driver=contact.querySelector('a.aral-r9-driver-cta');
-    if(!driver){
-     driver=document.createElement('a');
-     driver.className='af-cta aral-r9-driver-cta';
-     partner.insertAdjacentElement('afterend',driver);
-    }
-    driver.href=routes.drivers;
-    driver.classList.remove('aral-r3-dot-link');
-    driver.textContent='Для автомобилистов';
-    driver.classList.add('aral-r9-footer-cta');
-    driver.setAttribute('data-magnetic','footer-motorists');
-   }
-  }
-  document.querySelector('.aral-contour-compare')?.remove();
- }
-
  function installContactAndMenu(){
-  for(const layout of document.querySelectorAll('.aral-global-footer .af-layout')){
-   if(layout.querySelector('.af-column'))continue;
-   const [identity,nav,news,contact]=layout.children;
-   const brandColumn=document.createElement('div');
-   brandColumn.className='af-column';
-   brandColumn.append(identity,news);
-   layout.replaceChildren(brandColumn,nav,contact);
-  }
 
   for(const button of document.querySelectorAll('.home-menu-toggle,.nav-toggle,.mobile-toggle')){
    button.classList.add('aral-menu-toggle');
@@ -292,34 +246,16 @@
    });
   }
  }
- function installTimelineConnectors(){
-  document.querySelectorAll('#timeline .years').forEach(group=>{
-   if(group.dataset.segmentedTimeline)return;
-   group.dataset.segmentedTimeline='true';
-   const buttons=[...group.querySelectorAll('.year-btn')];
-   const segments=buttons.slice(1).map(()=>{
-    const line=document.createElement('span');line.className='aral-year-connector';line.setAttribute('aria-hidden','true');group.append(line);return line;
-   });
-   const measure=()=>segments.forEach((line,i)=>{
-    const a=buttons[i],b=buttons[i+1],left=a.offsetLeft+a.offsetWidth,gap=b.offsetLeft-left;
-    const sameRow=Math.abs(a.offsetTop-b.offsetTop)<2;
-    line.hidden=!sameRow||gap<=0;
-    if(!line.hidden){line.style.left=left+'px';line.style.top=(a.offsetTop+a.offsetHeight/2)+'px';line.style.width=gap+'px'}
-   });
-   const observer=new ResizeObserver(measure);observer.observe(group);buttons.forEach(b=>observer.observe(b));
-   measure();document.fonts?.ready.then(measure);
-  });
- }
  function install(){
   rewriteInternalLinks();
   installHeader();
   installHeaderActions();
-  installTimelineConnectors();
+
   installContactAndMenu();
   hideCoolantPublicReferences();
-  applyR9ContentReview();
+  document.querySelector('.aral-contour-compare')?.remove();
   if(new URLSearchParams(location.search).get('review')==='links')makeRouteInspection();
-  setTimeout(applyR9ContentReview,0);
+
   document.body.dataset.feedbackPreview='r12';
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();

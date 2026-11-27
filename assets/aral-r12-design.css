@@ -752,3 +752,408 @@ body .aral-compare-view .compare-head button {
     height: 72px;
   }
 }
+
+/* Shopping and wholesale handoffs. */
+.aral-grade {
+  color: inherit;
+}
+
+body :is(.detail-stage, .product-photo, .compare-head) .photo-failure {
+  display: none !important;
+}
+
+body :is(.detail-stage, .product-photo, .compare-head).image-missing .photo-failure {
+  display: block !important;
+}
+
+.pdp-doc-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 10px;
+}
+
+#product-documents,
+#contacts-stores #cc-detail {
+  scroll-margin-top: 106px;
+}
+
+body #assortment .pc-volumes,
+body #featured .pc-volumes {
+  display: block;
+  color: var(--aral-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+body :is(#assortment, #featured) .pc-body h3 a {
+  color: var(--aral-navy);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--aral-border);
+}
+
+body :is(#assortment, #featured) .pc-body h3 a:hover {
+  text-decoration-color: var(--aral-blue);
+}
+
+body .aral-compare-view .utility-row {
+  margin-block: 16px;
+}
+
+body .aral-compare-view .compare-title {
+  margin-bottom: 18px;
+}
+
+body .aral-compare-view .compare-table-wrap {
+  margin-bottom: 0;
+}
+
+body .aral-approved-contact {
+  align-items: start;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr);
+}
+
+.aral-order-context[hidden] {
+  display: none;
+}
+
+body #contacts-stores .aral-order-context:not([hidden]),
+body .aral-approved-identity .aral-order-context:not([hidden]) {
+  margin-block: 14px;
+  padding-block: 10px;
+  border-block: 1px solid currentColor;
+  font-weight: 750;
+}
+
+.aral-order-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+  color: var(--aral-white);
+}
+
+.aral-order-form label {
+  display: grid;
+  align-content: space-between;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.aral-order-form :is(input, textarea) {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--aral-border);
+  border-radius: 8px;
+  background: var(--aral-white);
+  color: var(--aral-ink);
+  font-size: 16px;
+}
+
+.aral-order-form input {
+  min-height: 44px;
+}
+
+.aral-order-form textarea {
+  resize: vertical;
+}
+
+@media (max-width: 480px) {
+  .aral-order-form textarea {
+    min-height: 9rem;
+  }
+}
+
+.aral-order-form :is(.aral-order-message, .aral-order-actions, .aral-order-status) {
+  grid-column: 1 / -1;
+}
+
+.aral-order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+body .aral-order-actions .contacts-cta {
+  min-height: 44px;
+  border: 1px solid var(--aral-on-dark);
+  border-radius: 8px;
+  background: var(--aral-white);
+  color: var(--aral-navy);
+}
+
+body .aral-order-actions a.contacts-cta:hover {
+  background: var(--aral-ice);
+}
+
+body .aral-order-form .aral-order-status {
+  color: var(--aral-on-dark);
+  margin: 0;
+  font-size: 14px;
+}
+
+.aral-order-status:empty {
+  display: none;
+}
+
+body .aral-approved-messengers .aral-max-button {
+  width: auto;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+body #contacts-stores.section {
+  padding-block: clamp(24px, 4vw, 56px);
+}
+
+body #contacts-stores .cc-tab {
+  min-height: 44px;
+}
+
+body #contacts-stores .cc-filter-line {
+  align-items: end;
+}
+
+body #contacts-stores .aral-store-search-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--aral-navy);
+  font-weight: 750;
+}
+
+body #contacts-stores .cc-search-wrap svg {
+  top: auto;
+  bottom: 14px;
+  transform: none;
+}
+
+body #contacts-stores .cc-search::placeholder {
+  color: var(--aral-muted);
+}
+
+body #contacts-stores .cc-main-directory:has(.cc-detail[hidden]) {
+  grid-template-columns: 1fr;
+  min-height: 0;
+}
+
+body #contacts-stores .cc-empty button {
+  display: block;
+  margin-top: 12px;
+}
+
+/* Editorial sections use the same alignment and action colors as the catalog. */
+body #home-page .aral-home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+
+body #home-page .aral-home-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 750;
+}
+
+body #home-page .aral-primary-action {
+  background: var(--aral-blue);
+  color: var(--aral-white);
+}
+
+body #home-page .aral-secondary-action,
+body #home-page .brand-copy .text-link {
+  background: transparent;
+  color: var(--aral-blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.aral-home-shortcuts,
+.aral-inline-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+}
+
+.aral-home-shortcuts {
+  max-width: 1390px;
+  padding: 14px clamp(18px, 4vw, 34px);
+  margin: auto;
+  border-block: 1px solid var(--aral-border);
+}
+
+:is(.aral-home-shortcuts, .aral-inline-nav) a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--aral-blue);
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+body #home-page .aral-home-b2b {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px 28px;
+  align-items: center;
+  background: var(--aral-navy);
+  color: var(--aral-white);
+}
+
+body #home-page .aral-home-b2b h2 {
+  color: var(--aral-white);
+  margin-top: 0;
+}
+
+body #home-page .aral-home-b2b p {
+  color: var(--aral-on-dark);
+  max-width: 62ch;
+  margin-bottom: 0;
+}
+
+body #home-page .aral-home-b2b a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.aral-numbered-steps {
+  margin-block: 24px;
+  max-width: 72ch;
+  padding-inline-start: 24px;
+}
+
+.aral-numbered-steps li {
+  padding: 14px 0 14px 8px;
+  border-top: 1px solid var(--aral-line);
+}
+
+.aral-numbered-steps li::marker {
+  color: var(--aral-blue);
+  font-weight: 750;
+}
+
+.aral-numbered-steps h3,
+.aral-numbered-steps p {
+  margin-block: 0 6px;
+}
+
+.aral-partner-contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: 24px 48px;
+}
+
+.aral-partner-contact img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--aral-radius);
+}
+
+body .aral-page[data-route="drivers"] .driver-lead-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(18px, 4vw, 52px);
+  background: transparent;
+}
+
+body .aral-page[data-route="drivers"] .driver-lead-layout::before {
+  display: none;
+}
+
+body .aral-page[data-route="drivers"] .driver-lead-copy {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+
+body .aral-page[data-route="drivers"] .driver-hero-card {
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 1.5;
+  border-radius: var(--aral-radius);
+  box-shadow: none;
+}
+
+body .aral-page[data-route="drivers"] .driver-hero-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+}
+
+.aral-selection-guide,
+.aral-editorial-lead {
+  color: var(--aral-ink);
+}
+
+.aral-selection-guide p,
+.aral-editorial-lead {
+  max-width: 66ch;
+}
+
+body #view-advantages .adv-race-media {
+  margin: 0;
+  height: auto;
+}
+
+body #view-advantages .adv-race-media img {
+  height: clamp(160px, 23vw, 320px);
+}
+
+body #view-advantages .adv-race-media figcaption {
+  padding: 8px clamp(18px, 5vw, 80px);
+  color: var(--aral-muted);
+  font-size: 14px;
+}
+
+body #view-company .hero {
+  min-height: 0;
+}
+
+body #view-company .hero-wrap {
+  min-height: clamp(180px, 22vw, 290px);
+}
+
+body #timeline .year-btn {
+  box-shadow: none !important;
+}
+
+body .aral-global-footer .af-inner {
+  padding-block: 32px;
+}
+
+body .aral-global-footer .af-layout {
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  body .aral-approved-contact,
+  body #home-page .aral-home-b2b,
+  .aral-partner-contact,
+  body .aral-page[data-route="drivers"] .driver-lead-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body #home-page .aral-home-actions {
+    align-items: start;
+    gap: 6px;
+  }
+
+  body #home-page .aral-home-actions a {
+    width: auto;
+  }
+}
