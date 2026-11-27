@@ -63,6 +63,8 @@ async function run() {
         const header = page.locator('header.aral-header-shell:visible').first();
         assert.equal(await header.locator('a.aral-preview-brand').count(), 1, path);
         assert.equal(Math.round((await header.boundingBox()).height), 82, path);
+        assert.equal(await header.locator('.aral-header-compare').getAttribute('aria-label'), 'Сравнение товаров: 0', path);
+        assert.equal(await header.locator('.aral-header-count').isVisible(), false, path);
         if (path.endsWith('#interesting')) {
           assert.equal(await header.locator('[aria-current="page"]').innerText(), 'Интересное');
         }
@@ -171,8 +173,11 @@ async function run() {
       });
       await catalogSearch.fill('');
       const ids = ['ARAL-001', 'ARAL-006', 'ARAL-013', 'ARAL-015'];
-      for (const id of ids) await page.locator('button[data-compare="' + id + '"]').click();
-      await page.locator('header .aral-header-compare').click();
+      const compareOn = id => page.locator('button[data-compare="' + id + '"]');
+      await compareOn(ids[0]).click();
+      await page.getByRole('link', { name: 'Сравнение товаров: 1' }).waitFor();
+      for (const id of ids.slice(1)) await compareOn(id).click();
+      await page.getByRole('link', { name: 'Сравнение товаров: 4' }).click();
       await page.waitForURL(url(catalog + '#/compare').href);
       await page.locator('#clearCompare').waitFor();
       const visibleColumns = page.locator('.compare-table thead [data-compare-column]:visible');
@@ -187,6 +192,12 @@ async function run() {
         await page.emulateMedia({ media: 'print' });
         assert.equal(await visibleColumns.count(), 4);
         await page.emulateMedia({ media: 'screen' });
+      }
+
+      for (const [path, ready] of [routes[0], routes[2]]) {
+        await visit(path, ready);
+        const badge = page.getByRole('link', { name: 'Сравнение товаров: 4' }).locator('.aral-header-count');
+        assert.equal(await badge.innerText(), '4', path);
       }
 
       await visit(section('contacts') + '#contacts-stores', '#contacts-stores .cc-tab');

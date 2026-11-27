@@ -1120,16 +1120,23 @@ body #view-advantages .adv-race-media figcaption {
   font-size: 14px;
 }
 
-body #view-company .hero {
-  min-height: 0;
+body #view-company .aral-brand-history h1 {
+  font-size: var(--aral-heading-hero);
+  line-height: 1.1;
+  margin: 0 0 24px;
 }
 
-body #view-company .hero-wrap {
-  min-height: clamp(180px, 22vw, 290px);
+body #view-company .aral-brand-history .two-col {
+  align-items: center;
 }
 
 body #timeline .year-btn {
   box-shadow: none !important;
+}
+
+body #timeline .year-detail {
+  grid-template-columns: minmax(0, 1fr);
+  box-shadow: none;
 }
 
 body .aral-global-footer .af-inner {

@@ -156,14 +156,20 @@
    compare.href=compareUrl.href;compare.classList.add('aral-header-control','aral-header-compare');compare.dataset.magnetic='header-compare';
    compare.querySelector('em,span')?.classList.add('aral-header-count');
   });
-  const syncCounts=()=>{
-   let count=0;try{const values=JSON.parse(localStorage.getItem('aralProductsV13Compare')||'[]');if(Array.isArray(values))count=values.filter(v=>typeof v==='string').slice(0,4).length}catch{}
-   document.querySelectorAll('.aral-header-count').forEach(el=>{
-    el.textContent=String(count);
-    el.hidden=count===0;
+  const paintCount=count=>{
+   document.querySelectorAll('.aral-header-compare').forEach(link=>{
+    const badge=link.querySelector('.aral-header-count');
+    badge.textContent=String(count);
+    badge.hidden=count===0;
+    link.setAttribute('aria-label',`Сравнение товаров: ${count}`);
    });
   };
-  syncCounts();window.addEventListener('focus',syncCounts);window.addEventListener('storage',e=>{if(e.key==='aralProductsV13Compare')syncCounts()});
+  const syncCounts=()=>{
+   let count=0;try{const values=JSON.parse(localStorage.getItem('aralProductsV13Compare')||'[]');if(Array.isArray(values))count=values.filter(v=>typeof v==='string').slice(0,4).length}catch{}
+   paintCount(count);
+  };
+  syncCounts();window.addEventListener('pageshow',syncCounts);window.addEventListener('storage',e=>{if(!e.key||e.key==='aralProductsV13Compare')syncCounts()});
+  window.addEventListener('aral:compare-change',e=>paintCount(e.detail));
  }
  function hideCoolantPublicReferences(){
   const obsolete=/Silikatfrei\s*G12|охлаждающ(?:ие|ая|их)\s+жидкост(?:и|ь|ей)|антифриз/iu;
