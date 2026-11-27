@@ -1,0 +1,1166 @@
+@font-face {
+  font-family: Nunito;
+  src: url("fonts/nunito-r12.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+}
+
+:root {
+  --aral-font: Nunito, system-ui, "Segoe UI", sans-serif;
+  --aral-blue: #0055c3;
+  --aral-navy: #0a3266;
+  --aral-ink: #102745;
+  --aral-muted: #49637e;
+  --aral-white: #fff;
+  --aral-ice: #e6eef9;
+  --aral-paper: #f3f7fc;
+  --aral-line: #dde7f1;
+  --aral-border: #d6e3f1;
+  --aral-on-dark: #c9dcf6;
+  --aral-radius: 14px;
+  --aral-section-gap: clamp(40px, 6vw, 88px);
+  --aral-heading-hero: clamp(36px, 4.1vw, 60px);
+  --aral-heading-editorial: clamp(32px, 3.6vw, 52px);
+  --aral-heading-service: clamp(30px, 3vw, 44px);
+  --blue: var(--aral-blue);
+  --blue2: var(--aral-blue);
+  --bright: var(--aral-blue);
+  --navy: var(--aral-navy);
+  --deep: var(--aral-navy);
+  --ink: var(--aral-ink);
+  --muted: var(--aral-muted);
+  --slate: var(--aral-muted);
+  --line: var(--aral-line);
+  --ice: var(--aral-ice);
+  --mist: var(--aral-paper);
+  --paper: var(--aral-white);
+  --yellow: var(--aral-ice);
+  --shadow: none;
+}
+
+body {
+  font-family: var(--aral-font);
+  font-weight: 450;
+  color: var(--aral-ink);
+  background: var(--aral-white);
+}
+
+body :is(button, input, select, textarea, .aral-global-footer, header a.aral-header-control) {
+  font-family: var(--aral-font) !important;
+}
+
+body :is(main, .adv-race-hero, .contacts-hero) :is(h1, h2, h3) {
+  font-weight: 750;
+  letter-spacing: -.012em;
+  line-height: 1.12;
+  overflow-wrap: break-word;
+}
+
+body :is(main, .adv-race-hero, .contacts-hero) h2 {
+  font-size: clamp(28px, 3vw, 38px);
+}
+
+body main :is(.copy, .section-intro, .section-header, .hero-copy, .aral-copy, .brand-copy, .tech-story__copy, .story-content, .driver-lead-copy, .topic-copy) p,
+body main p.part-copy {
+  max-inline-size: 62ch;
+  font-size: 17px;
+  font-weight: 450;
+  line-height: 1.6;
+}
+
+body :is(.spec-table, .specs, .compare-table, .variant, .pc-volumes, .specchips, .aral-approved-contact, .aral-footer-phones) {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+body :focus-visible,
+body :is(#featured, #assortment) :focus-visible {
+  outline: 2px solid var(--aral-blue);
+  outline-offset: 3px;
+}
+
+body header:is(.home-nav, .site-header, .nav) {
+  background: var(--aral-navy) !important;
+  border-color: var(--aral-navy) !important;
+}
+
+body header nav.aral-jelly-menu a.aral-jelly-chip {
+  background: transparent;
+  border-color: transparent !important;
+  border-radius: 8px;
+  color: var(--aral-white) !important;
+  will-change: auto;
+}
+
+body header nav.aral-jelly-menu a.aral-jelly-chip:is([aria-current="page"], :hover, :focus-visible) {
+  background: var(--aral-ice);
+  color: var(--aral-navy) !important;
+}
+
+body header a.aral-preview-brand::before {
+  content: none;
+}
+
+body header a.aral-preview-brand img {
+  filter: none !important;
+}
+
+body header a.aral-header-control {
+  background: var(--aral-white) !important;
+  border-color: var(--aral-border) !important;
+  color: var(--aral-navy) !important;
+  box-shadow: none !important;
+}
+
+body header :is(.navtools, .home-nav-tools, .aral-header-actions) a.aral-header-product,
+body .notice-top {
+  display: none !important;
+}
+
+body header :focus-visible,
+body .aral-global-footer :focus-visible {
+  outline-color: var(--aral-on-dark) !important;
+}
+
+body :is(main .section.gray, main .home-section:nth-of-type(even), .aral-r12-wholesale) {
+  background: var(--aral-paper);
+}
+
+body #home-page :is(.home-section, .tech-story) {
+  margin-block: 0;
+  padding-block: var(--aral-section-gap);
+}
+
+body #home-page :is(#featured, #audiences, #b2b)::before,
+body #home-page :is(#featured, #audiences, #b2b)::after,
+body #assortment .product-card--minimal :is(.pin-wave, .pin-perspective),
+body #featured .product-card--minimal::before,
+body #featured .product-card--minimal::after {
+  display: none !important;
+}
+
+body #home-page .audience-tile {
+  border-color: transparent;
+  border-radius: var(--aral-radius);
+  box-shadow: none;
+}
+
+body #home-page #audiences .audience-tile::after {
+  background: linear-gradient(0deg, #0a3266 0%, #0a3266b3 53%, transparent 100%) !important;
+}
+
+body #home-page #audiences .aral-r3-dot-link {
+  color: var(--aral-white) !important;
+}
+
+body #home-page .tech-story {
+  min-height: 0;
+  background: var(--aral-navy);
+  box-shadow: none;
+}
+
+body #home-page :is(.tech-link, .purchase-card--blue .card-link-label) {
+  color: var(--aral-on-dark);
+}
+
+body #home-page :is(.hero-cta, .btn-primary),
+body #assortment #applyFilters {
+  background: var(--aral-blue);
+  color: var(--aral-white);
+}
+
+body :is(main > .hero, .aral-r12-cooperation, .driver-doc-tip) {
+  background: var(--aral-paper);
+}
+
+body.aral-contour-preview :is(#home-page, #main, #home-page #featured) {
+  background: var(--aral-white);
+}
+
+body.aral-contour-preview #main > .hero {
+  background: var(--aral-paper);
+}
+
+@media (min-width: 901px) {
+  body #main .hero-art--supplied img {
+    right: 0;
+    max-width: 100%;
+  }
+}
+
+body.aral-contour-preview #assortment::before,
+body.aral-contour-preview #assortment::after,
+body main > .hero::before,
+body main > .hero::after,
+body main .hero-index {
+  display: none !important;
+}
+
+body :is(#drv-intro .driver-nav, #part-top .part-hero-nav, #contacts-top .contacts-quick) {
+  gap: 0 clamp(16px, 3vw, 32px);
+}
+
+body #contacts-top .contacts-quick {
+  grid-template-columns: 1fr;
+}
+
+body :is(#drv-intro .driver-nav, #part-top .part-hero-nav, #contacts-top .contacts-quick) > a {
+  min-height: 0;
+  padding: 16px 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--aral-border);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body :is(#drv-intro .driver-nav, #part-top .part-hero-nav, #contacts-top .contacts-quick) > a:hover {
+  background: transparent;
+  border-color: var(--aral-blue);
+  box-shadow: none;
+  transform: none;
+}
+
+body :is(#featured, #assortment) .product-card--minimal {
+  border: 1px solid var(--aral-border) !important;
+  border-radius: var(--aral-radius);
+  background: var(--aral-white);
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+body :is(#featured, #assortment) .product-card--minimal:is(:hover, :focus-within) {
+  border-color: var(--aral-blue) !important;
+}
+
+body :is(#featured, #assortment) .product-card--minimal :is(.product-photo, .pc-body) {
+  background: var(--aral-white) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+body :is(#featured, #assortment) .product-card--minimal .product-photo img {
+  transform: none !important;
+  scale: none !important;
+  filter: none !important;
+}
+
+body :is(#featured, #assortment) .product-card--minimal .specchips span {
+  background: var(--aral-ice);
+  color: var(--aral-navy);
+}
+
+body .aral-vehicle-chooser {
+  padding-inline: 0;
+  background: transparent;
+  border: 0;
+}
+
+body .aral-vehicle-chooser button {
+  background: var(--aral-white);
+  border: 1px solid var(--aral-border);
+  border-radius: var(--aral-radius);
+  color: var(--aral-navy);
+  box-shadow: none;
+  transform: none;
+}
+
+body .aral-vehicle-chooser button[aria-pressed="true"] {
+  background: var(--aral-ice);
+  border-color: var(--aral-blue);
+  color: var(--aral-navy);
+  box-shadow: none;
+}
+
+body :is(.vehicle-icon, .driver-step-num, .driver-term-key, .driver-doc-code, .part-audience-number, .aral-vehicle-chooser button .vehicle-icon) {
+  color: var(--aral-blue);
+}
+
+body :is(.driver-step, .driver-term, .driver-doc, .driver-purchase, .part-benefit, .part-audience, .contacts-site, .story-card) {
+  min-height: 0;
+  padding: clamp(15px, 2.4vw, 28px) 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--aral-border);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body :is(.driver-steps, .driver-terms, .driver-purchase-grid, .part-audience-grid, .story-grid) {
+  align-items: start;
+  column-gap: clamp(20px, 4vw, 52px);
+}
+
+body .story-card {
+  padding: 0;
+}
+
+body :is(.story-card[open], .story-card.open, .driver-maintenance-list, .aral-r12-buy-service) {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body .driver-maintenance-list {
+  border: 0;
+  border-top: 1px solid var(--aral-border);
+  padding-inline: 0;
+}
+
+body .aral-page[data-route="drivers"] .driver-lead-layout {
+  min-height: 0;
+}
+
+body .driver-path-bar {
+  background: var(--aral-blue);
+}
+
+body :is(.aral-r12-coop-panel, .aral-r12-contact-band, .aral-r12-contact-panel, .aral-r12-buy-service) {
+  background: var(--aral-paper);
+  border: 0;
+  border-radius: var(--aral-radius);
+  box-shadow: none;
+}
+
+body .aral-r12-buy-routes .contacts-site {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--aral-border);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body .aral-approved-contact {
+  background: var(--aral-navy);
+  border-radius: var(--aral-radius);
+}
+
+body :is(.aral-approved-contact, .aral-global-footer) :is(.aral-approved-intro, .aral-approved-general > span, .aral-approved-manager > span, .aral-importer-label, .aral-max-note) {
+  color: var(--aral-on-dark) !important;
+}
+
+body :is(main, header, .aral-global-footer) [data-magnetic] {
+  transform: none !important;
+  translate: none !important;
+}
+
+body .aral-global-footer {
+  --af-muted: var(--aral-on-dark);
+  background: var(--aral-navy);
+  color: var(--aral-white);
+  box-shadow: none;
+}
+
+body .aral-global-footer::before,
+body .aral-global-footer::after {
+  content: none;
+}
+
+body .aral-global-footer .af-inner {
+  padding-top: clamp(32px, 5vw, 56px);
+}
+
+body .aral-global-footer .af-column {
+  display: grid;
+  align-content: start;
+  gap: 24px;
+}
+
+body .aral-global-footer :is(.af-title, .af-claim) {
+  font-size: 18px;
+  font-weight: 750;
+  letter-spacing: -.012em;
+}
+
+body .aral-global-footer :is(.af-links a, .af-contact a, .af-lead, .af-teaser span) {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+body .aral-global-footer .af-bottom {
+  color: var(--aral-on-dark);
+  font-size: 13px;
+}
+
+@media (min-width: 761px) {
+  body .aral-global-footer .af-layout {
+    grid-template-columns: minmax(0, 1.15fr) repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1200px) {
+  body header:is(.home-nav, .site-header, .nav) button.aral-menu-toggle {
+    position: static !important;
+    order: 0;
+    width: auto !important;
+    min-width: 0 !important;
+    height: 44px !important;
+    padding: 0 12px !important;
+    border: 1px solid var(--aral-on-dark) !important;
+    border-radius: 8px !important;
+    background: transparent !important;
+  }
+
+  body header:is(.home-nav, .site-header, .nav) button.aral-menu-toggle::before {
+    content: none;
+  }
+
+  body header:is(.home-nav, .site-header, .nav) button.aral-menu-toggle .aral-menu-label {
+    color: var(--aral-white) !important;
+    font-size: 13px !important;
+    letter-spacing: 0 !important;
+  }
+
+  body header nav.aral-jelly-menu a.aral-jelly-chip {
+    color: var(--aral-navy) !important;
+  }
+
+  body header nav.aral-jelly-menu a.aral-jelly-chip:focus-visible {
+    outline-color: var(--aral-blue) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body .aral-global-footer .af-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Shared header used by each of the R12 page shells. */
+body header.aral-header-shell {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  border-width: 0 !important;
+}
+
+body header.aral-header-shell .aral-header-row {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between !important;
+  width: 100%;
+  max-width: 1440px;
+  box-sizing: border-box;
+  min-height: 82px !important;
+  height: 82px !important;
+  margin-inline: auto;
+  padding: 0 clamp(16px, 4vw, 60px);
+  gap: 12px !important;
+}
+
+body header.aral-header-shell nav.aral-jelly-menu {
+  padding-inline: 0;
+  gap: 2px;
+}
+
+body header.aral-header-shell nav.aral-jelly-menu a.aral-jelly-chip {
+  padding-inline: 10px !important;
+}
+
+body header.aral-header-shell .aral-header-actions {
+  order: 4;
+  flex: 0 0 auto;
+}
+
+body header.aral-header-shell .aral-header-actions a.aral-header-compare {
+  width: 112px;
+  padding-inline: 10px !important;
+  font-size: 13px !important;
+}
+
+body header.aral-header-shell .aral-header-count[hidden] {
+  display: none !important;
+}
+
+body #home-page .aral-copy h1 {
+  font-size: var(--aral-heading-hero);
+}
+
+body :is(#view-company, #view-interesting) .hero h1,
+body #view-advantages .adv-race-copy h1,
+body :is(#drv-intro, #part-top) h1 {
+  font-size: var(--aral-heading-editorial);
+  font-weight: 750;
+  letter-spacing: -.012em;
+  line-height: 1.12;
+}
+
+body :is(#contacts-top, .aral-compare-view, .catalog-entry) h1 {
+  font-size: var(--aral-heading-service);
+  line-height: 1.12;
+  letter-spacing: -.012em;
+}
+
+body #view-advantages .adv-race-media {
+  height: clamp(180px, 24vw, 340px);
+  aspect-ratio: auto;
+}
+
+body #view-advantages .adv-race-media::after {
+  content: none;
+}
+
+.catalog-entry {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px 32px;
+  max-width: 960px;
+  padding-block: clamp(24px, 4vw, 52px) 22px;
+}
+
+.catalog-entry h1 {
+  margin: 0 0 10px;
+}
+
+.catalog-entry p {
+  max-width: 65ch;
+  margin: 0;
+  color: var(--aral-muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.catalog-entry .catalog-guide {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  min-height: 44px;
+}
+
+.catalog-search {
+  max-width: 780px;
+  margin-bottom: 14px;
+}
+
+.catalog-search label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--aral-navy);
+  font-size: 15px;
+  font-weight: 750;
+}
+
+body .catalog-search input {
+  font-size: 16px;
+}
+
+body .catalog-search input::placeholder {
+  color: var(--aral-muted);
+  opacity: 1;
+}
+
+body #assortment .aral-vehicle-chooser {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 20px;
+  padding-block: 0;
+}
+
+body #assortment .aral-vehicle-chooser button {
+  min-height: 44px;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  gap: 8px;
+}
+
+body #assortment .vehicle-icon {
+  flex-basis: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+body #assortment .aral-vehicle-chooser .aral-wheel {
+  width: 18px;
+  height: 18px;
+}
+
+body #assortment .catalog-toolbar {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+body #assortment .select-sort {
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
+}
+
+body #assortment .compare-add,
+body .detail-copy .variant {
+  min-height: 44px;
+}
+
+.aral-grade {
+  white-space: nowrap;
+}
+
+.aral-filter-dialog {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(360px, 91vw);
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+}
+
+.aral-filter-dialog::backdrop {
+  background: #10274599;
+}
+
+body .aral-filter-dialog #filtersPanel {
+  position: static !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+body .aral-filter-dialog #closeFilters {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.aral-compare-view {
+  min-height: 65vh;
+  padding-bottom: 64px;
+}
+
+body .aral-compare-view .compare-title h1 {
+  margin-block: 0 12px;
+}
+
+body .aral-compare-view .compare-table th[data-compare-column] {
+  width: auto;
+  color: var(--aral-ink);
+  background: var(--aral-white);
+}
+
+body .aral-compare-view .compare-head button {
+  min-height: 44px;
+}
+
+.aral-compare-pair {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  body header.aral-header-shell .aral-header-row > .aral-menu-toggle {
+    order: 1;
+    margin-right: auto !important;
+  }
+
+  body header.aral-header-shell .aral-header-actions {
+    margin: 0 !important;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .catalog-entry {
+    display: block;
+    padding-bottom: 12px;
+  }
+
+  body #assortment .catalog-toolbar {
+    gap: 8px;
+  }
+
+  body #assortment :is(.mobile-filter-open, .select-sort) {
+    min-height: 44px;
+    flex: 1 1 0;
+    margin: 0;
+  }
+
+  body .product-detail .detail-hero {
+    gap: 24px;
+  }
+
+  body .product-detail .detail-copy {
+    order: -1;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .aral-compare-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    min-inline-size: 0;
+    padding: 0;
+    border: 0;
+    margin: 0 0 16px;
+  }
+
+  .aral-compare-pair legend {
+    padding: 0;
+    margin-bottom: 8px;
+    font-weight: 750;
+  }
+
+  .aral-compare-pair label {
+    min-width: 0;
+    font-size: 13px;
+    color: var(--aral-navy);
+  }
+
+  .aral-compare-pair select {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    margin-top: 4px;
+    border: 1px solid var(--aral-border);
+    border-radius: 8px;
+    padding-inline: 6px;
+    font-size: 14px;
+    color: var(--aral-ink);
+    background: var(--aral-white);
+  }
+
+  body .aral-compare-view .compare-table-wrap {
+    overflow: visible;
+  }
+
+  body .aral-compare-view .compare-table {
+    table-layout: fixed;
+    min-width: 0;
+  }
+
+  body .aral-compare-view .compare-table :is(th, td) {
+    min-width: 0;
+    padding: 10px 7px;
+    overflow-wrap: anywhere;
+  }
+
+  body .aral-compare-view .compare-table th:first-child {
+    width: 27%;
+    color: var(--aral-navy);
+  }
+
+  body .aral-compare-view .compare-table .outside-pair {
+    display: none;
+  }
+
+  body .aral-compare-view .compare-head img {
+    height: 72px;
+  }
+}
+
+/* Shopping and wholesale handoffs. */
+.aral-grade {
+  color: inherit;
+}
+
+body :is(.detail-stage, .product-photo, .compare-head) .photo-failure {
+  display: none !important;
+}
+
+body :is(.detail-stage, .product-photo, .compare-head).image-missing .photo-failure {
+  display: block !important;
+}
+
+.pdp-doc-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 10px;
+}
+
+#product-documents,
+#contacts-stores #cc-detail {
+  scroll-margin-top: 106px;
+}
+
+body #assortment .pc-volumes,
+body #featured .pc-volumes {
+  display: block;
+  color: var(--aral-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+body :is(#assortment, #featured) .pc-body h3 a {
+  color: var(--aral-navy);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--aral-border);
+}
+
+body :is(#assortment, #featured) .pc-body h3 a:hover {
+  text-decoration-color: var(--aral-blue);
+}
+
+body .aral-compare-view .utility-row {
+  margin-block: 16px;
+}
+
+body .aral-compare-view .compare-title {
+  margin-bottom: 18px;
+}
+
+body .aral-compare-view .compare-table-wrap {
+  margin-bottom: 0;
+}
+
+body .aral-approved-contact {
+  align-items: start;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr);
+}
+
+.aral-order-context[hidden] {
+  display: none;
+}
+
+body #contacts-stores .aral-order-context:not([hidden]),
+body .aral-approved-identity .aral-order-context:not([hidden]) {
+  margin-block: 14px;
+  padding-block: 10px;
+  border-block: 1px solid currentColor;
+  font-weight: 750;
+}
+
+.aral-order-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+  color: var(--aral-white);
+}
+
+.aral-order-form label {
+  display: grid;
+  align-content: space-between;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.aral-order-form :is(input, textarea) {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--aral-border);
+  border-radius: 8px;
+  background: var(--aral-white);
+  color: var(--aral-ink);
+  font-size: 16px;
+}
+
+.aral-order-form input {
+  min-height: 44px;
+}
+
+.aral-order-form textarea {
+  resize: vertical;
+}
+
+@media (max-width: 480px) {
+  .aral-order-form textarea {
+    min-height: 9rem;
+  }
+}
+
+.aral-order-form :is(.aral-order-message, .aral-order-actions, .aral-order-status) {
+  grid-column: 1 / -1;
+}
+
+.aral-order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+body .aral-order-actions .contacts-cta {
+  min-height: 44px;
+  border: 1px solid var(--aral-on-dark);
+  border-radius: 8px;
+  background: var(--aral-white);
+  color: var(--aral-navy);
+}
+
+body .aral-order-actions a.contacts-cta:hover {
+  background: var(--aral-ice);
+}
+
+body .aral-order-form .aral-order-status {
+  color: var(--aral-on-dark);
+  margin: 0;
+  font-size: 14px;
+}
+
+.aral-order-status:empty {
+  display: none;
+}
+
+body .aral-approved-messengers .aral-max-button {
+  width: auto;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+body #contacts-stores.section {
+  padding-block: clamp(24px, 4vw, 56px);
+}
+
+body #contacts-stores .cc-tab {
+  min-height: 44px;
+}
+
+body #contacts-stores .cc-filter-line {
+  align-items: end;
+}
+
+body #contacts-stores .aral-store-search-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--aral-navy);
+  font-weight: 750;
+}
+
+body #contacts-stores .cc-search-wrap svg {
+  top: auto;
+  bottom: 14px;
+  transform: none;
+}
+
+body #contacts-stores .cc-search::placeholder {
+  color: var(--aral-muted);
+}
+
+body #contacts-stores .cc-main-directory:has(.cc-detail[hidden]) {
+  grid-template-columns: 1fr;
+  min-height: 0;
+}
+
+body #contacts-stores .cc-empty button {
+  display: block;
+  margin-top: 12px;
+}
+
+/* Editorial sections use the same alignment and action colors as the catalog. */
+body #home-page .aral-home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+
+body #home-page .aral-home-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 750;
+}
+
+body #home-page .aral-primary-action {
+  background: var(--aral-blue);
+  color: var(--aral-white);
+}
+
+body #home-page .aral-secondary-action,
+body #home-page .brand-copy .text-link {
+  background: transparent;
+  color: var(--aral-blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.aral-home-shortcuts,
+.aral-inline-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+}
+
+.aral-home-shortcuts {
+  max-width: 1390px;
+  padding: 14px clamp(18px, 4vw, 34px);
+  margin: auto;
+  border-block: 1px solid var(--aral-border);
+}
+
+:is(.aral-home-shortcuts, .aral-inline-nav) a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--aral-blue);
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+body #home-page .aral-home-b2b {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px 28px;
+  align-items: center;
+  background: var(--aral-navy);
+  color: var(--aral-white);
+}
+
+body #home-page .aral-home-b2b h2 {
+  color: var(--aral-white);
+  margin-top: 0;
+}
+
+body #home-page .aral-home-b2b p {
+  color: var(--aral-on-dark);
+  max-width: 62ch;
+  margin-bottom: 0;
+}
+
+body #home-page .aral-home-b2b a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.aral-numbered-steps {
+  margin-block: 24px;
+  max-width: 72ch;
+  padding-inline-start: 24px;
+}
+
+.aral-numbered-steps li {
+  padding: 14px 0 14px 8px;
+  border-top: 1px solid var(--aral-line);
+}
+
+.aral-numbered-steps li::marker {
+  color: var(--aral-blue);
+  font-weight: 750;
+}
+
+.aral-numbered-steps h3,
+.aral-numbered-steps p {
+  margin-block: 0 6px;
+}
+
+.aral-partner-contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: 24px 48px;
+}
+
+.aral-partner-contact img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--aral-radius);
+}
+
+body .aral-page[data-route="drivers"] .driver-lead-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(18px, 4vw, 52px);
+  background: transparent;
+}
+
+body .aral-page[data-route="drivers"] .driver-lead-layout::before {
+  display: none;
+}
+
+body .aral-page[data-route="drivers"] .driver-lead-copy {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+
+body .aral-page[data-route="drivers"] .driver-hero-card {
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 1.5;
+  border-radius: var(--aral-radius);
+  box-shadow: none;
+}
+
+body .aral-page[data-route="drivers"] .driver-hero-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+}
+
+.aral-selection-guide,
+.aral-editorial-lead {
+  color: var(--aral-ink);
+}
+
+.aral-selection-guide p,
+.aral-editorial-lead {
+  max-width: 66ch;
+}
+
+body #view-advantages .adv-race-media {
+  margin: 0;
+  height: auto;
+}
+
+body #view-advantages .adv-race-media img {
+  height: clamp(160px, 23vw, 320px);
+}
+
+body #view-advantages .adv-race-media figcaption {
+  padding: 8px clamp(18px, 5vw, 80px);
+  color: var(--aral-muted);
+  font-size: 14px;
+}
+
+body #view-company .aral-brand-history h1 {
+  font-size: var(--aral-heading-hero);
+  line-height: 1.1;
+  margin: 0 0 24px;
+}
+
+body #view-company .aral-brand-history .two-col {
+  align-items: center;
+}
+
+body #timeline .year-btn {
+  box-shadow: none !important;
+}
+
+body #timeline .year-detail {
+  grid-template-columns: minmax(0, 1fr);
+  box-shadow: none;
+}
+
+body .aral-global-footer .af-inner {
+  padding-block: 32px;
+}
+
+body .aral-global-footer .af-layout {
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  body .aral-approved-contact,
+  body #home-page .aral-home-b2b,
+  .aral-partner-contact,
+  body .aral-page[data-route="drivers"] .driver-lead-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body #home-page .aral-home-actions {
+    align-items: start;
+    gap: 6px;
+  }
+
+  body #home-page .aral-home-actions a {
+    width: auto;
+  }
+}

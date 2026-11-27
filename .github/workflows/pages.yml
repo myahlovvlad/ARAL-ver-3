@@ -1,0 +1,59 @@
+name: Publish ARAL site
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages-${{ github.event_name == 'pull_request' && github.ref || 'release' }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Assemble public site
+        run: |
+          python3 scripts/build_site.py
+          python3 scripts/validate_catalog.py _site
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Check the built site under a path prefix
+        run: |
+          staging="$(mktemp -d)"
+          repo_name="${GITHUB_REPOSITORY##*/}"
+          ln -s "$PWD/_site" "$staging/$repo_name"
+          python3 -m http.server 8123 --bind 127.0.0.1 --directory "$staging" > /tmp/aral-release-http.log 2>&1 &
+          server=$!
+          trap 'kill "$server"' EXIT
+          curl --fail --silent --retry 5 --retry-connrefused "http://127.0.0.1:8123/$repo_name/" > /dev/null
+          node scripts/check_release.cjs "http://127.0.0.1:8123/$repo_name/"
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  publish:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
