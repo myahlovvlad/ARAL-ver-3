@@ -20,6 +20,9 @@
   --aral-on-dark: #c9dcf6;
   --aral-radius: 14px;
   --aral-section-gap: clamp(40px, 6vw, 88px);
+  --aral-heading-hero: clamp(36px, 4.1vw, 60px);
+  --aral-heading-editorial: clamp(32px, 3.6vw, 52px);
+  --aral-heading-service: clamp(30px, 3vw, 44px);
   --blue: var(--aral-blue);
   --blue2: var(--aral-blue);
   --bright: var(--aral-blue);
@@ -420,5 +423,332 @@ body .aral-global-footer .af-bottom {
 @media (max-width: 760px) {
   body .aral-global-footer .af-layout {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Shared header used by each of the R12 page shells. */
+body header.aral-header-shell {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  border-width: 0 !important;
+}
+
+body header.aral-header-shell .aral-header-row {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between !important;
+  width: 100%;
+  max-width: 1440px;
+  box-sizing: border-box;
+  min-height: 82px !important;
+  height: 82px !important;
+  margin-inline: auto;
+  padding: 0 clamp(16px, 4vw, 60px);
+  gap: 12px !important;
+}
+
+body header.aral-header-shell nav.aral-jelly-menu {
+  padding-inline: 0;
+  gap: 2px;
+}
+
+body header.aral-header-shell nav.aral-jelly-menu a.aral-jelly-chip {
+  padding-inline: 10px !important;
+}
+
+body header.aral-header-shell .aral-header-actions {
+  order: 4;
+  flex: 0 0 auto;
+}
+
+body header.aral-header-shell .aral-header-actions a.aral-header-compare {
+  width: 112px;
+  padding-inline: 10px !important;
+  font-size: 13px !important;
+}
+
+body header.aral-header-shell .aral-header-count[hidden] {
+  display: none !important;
+}
+
+body #home-page .aral-copy h1 {
+  font-size: var(--aral-heading-hero);
+}
+
+body :is(#view-company, #view-interesting) .hero h1,
+body #view-advantages .adv-race-copy h1,
+body :is(#drv-intro, #part-top) h1 {
+  font-size: var(--aral-heading-editorial);
+  font-weight: 750;
+  letter-spacing: -.012em;
+  line-height: 1.12;
+}
+
+body :is(#contacts-top, .aral-compare-view, .catalog-entry) h1 {
+  font-size: var(--aral-heading-service);
+  line-height: 1.12;
+  letter-spacing: -.012em;
+}
+
+body #view-advantages .adv-race-media {
+  height: clamp(180px, 24vw, 340px);
+  aspect-ratio: auto;
+}
+
+body #view-advantages .adv-race-media::after {
+  content: none;
+}
+
+.catalog-entry {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px 32px;
+  max-width: 960px;
+  padding-block: clamp(24px, 4vw, 52px) 22px;
+}
+
+.catalog-entry h1 {
+  margin: 0 0 10px;
+}
+
+.catalog-entry p {
+  max-width: 65ch;
+  margin: 0;
+  color: var(--aral-muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.catalog-entry .catalog-guide {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  min-height: 44px;
+}
+
+.catalog-search {
+  max-width: 780px;
+  margin-bottom: 14px;
+}
+
+.catalog-search label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--aral-navy);
+  font-size: 15px;
+  font-weight: 750;
+}
+
+body .catalog-search input {
+  font-size: 16px;
+}
+
+body .catalog-search input::placeholder {
+  color: var(--aral-muted);
+  opacity: 1;
+}
+
+body #assortment .aral-vehicle-chooser {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 20px;
+  padding-block: 0;
+}
+
+body #assortment .aral-vehicle-chooser button {
+  min-height: 44px;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  gap: 8px;
+}
+
+body #assortment .vehicle-icon {
+  flex-basis: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+body #assortment .aral-vehicle-chooser .aral-wheel {
+  width: 18px;
+  height: 18px;
+}
+
+body #assortment .catalog-toolbar {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+body #assortment .select-sort {
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
+}
+
+body #assortment .compare-add,
+body .detail-copy .variant {
+  min-height: 44px;
+}
+
+.aral-grade {
+  white-space: nowrap;
+}
+
+.aral-filter-dialog {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(360px, 91vw);
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+}
+
+.aral-filter-dialog::backdrop {
+  background: #10274599;
+}
+
+body .aral-filter-dialog #filtersPanel {
+  position: static !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+body .aral-filter-dialog #closeFilters {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.aral-compare-view {
+  min-height: 65vh;
+  padding-bottom: 64px;
+}
+
+body .aral-compare-view .compare-title h1 {
+  margin-block: 0 12px;
+}
+
+body .aral-compare-view .compare-table th[data-compare-column] {
+  width: auto;
+  color: var(--aral-ink);
+  background: var(--aral-white);
+}
+
+body .aral-compare-view .compare-head button {
+  min-height: 44px;
+}
+
+.aral-compare-pair {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  body header.aral-header-shell .aral-header-row > .aral-menu-toggle {
+    order: 1;
+    margin-right: auto !important;
+  }
+
+  body header.aral-header-shell .aral-header-actions {
+    margin: 0 !important;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .catalog-entry {
+    display: block;
+    padding-bottom: 12px;
+  }
+
+  body #assortment .catalog-toolbar {
+    gap: 8px;
+  }
+
+  body #assortment :is(.mobile-filter-open, .select-sort) {
+    min-height: 44px;
+    flex: 1 1 0;
+    margin: 0;
+  }
+
+  body .product-detail .detail-hero {
+    gap: 24px;
+  }
+
+  body .product-detail .detail-copy {
+    order: -1;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .aral-compare-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    min-inline-size: 0;
+    padding: 0;
+    border: 0;
+    margin: 0 0 16px;
+  }
+
+  .aral-compare-pair legend {
+    padding: 0;
+    margin-bottom: 8px;
+    font-weight: 750;
+  }
+
+  .aral-compare-pair label {
+    min-width: 0;
+    font-size: 13px;
+    color: var(--aral-navy);
+  }
+
+  .aral-compare-pair select {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    margin-top: 4px;
+    border: 1px solid var(--aral-border);
+    border-radius: 8px;
+    padding-inline: 6px;
+    font-size: 14px;
+    color: var(--aral-ink);
+    background: var(--aral-white);
+  }
+
+  body .aral-compare-view .compare-table-wrap {
+    overflow: visible;
+  }
+
+  body .aral-compare-view .compare-table {
+    table-layout: fixed;
+    min-width: 0;
+  }
+
+  body .aral-compare-view .compare-table :is(th, td) {
+    min-width: 0;
+    padding: 10px 7px;
+    overflow-wrap: anywhere;
+  }
+
+  body .aral-compare-view .compare-table th:first-child {
+    width: 27%;
+    color: var(--aral-navy);
+  }
+
+  body .aral-compare-view .compare-table .outside-pair {
+    display: none;
+  }
+
+  body .aral-compare-view .compare-head img {
+    height: 72px;
   }
 }

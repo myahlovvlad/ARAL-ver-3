@@ -60,6 +60,12 @@ async function run() {
       for (const [path, ready] of routes) {
         await visit(path, ready);
         assert.equal(await page.locator('body').getAttribute('data-feedback-preview'), 'r12');
+        const header = page.locator('header.aral-header-shell:visible').first();
+        assert.equal(await header.locator('a.aral-preview-brand').count(), 1, path);
+        assert.equal(Math.round((await header.boundingBox()).height), 82, path);
+        if (path.endsWith('#interesting')) {
+          assert.equal(await header.locator('[aria-current="page"]').innerText(), 'Интересное');
+        }
         assert.ok(await page.evaluate(async () => (await document.fonts.load('450 17px Nunito', 'Масло')).length));
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), path);
         await checkLocalLinks(page, checked);
@@ -89,6 +95,29 @@ async function run() {
       }
 
       await visit(catalog + '#/catalog', '#assortment .product-card');
+      const catalogSearch = page.getByLabel('Поиск масла');
+      const searchTop = await catalogSearch.evaluate(input => input.getBoundingClientRect().top);
+      assert.ok(searchTop > 0 && searchTop < 400, 'Search must be in the first screen');
+      await page.locator('a.catalog-guide').click();
+      await page.waitForURL(url(catalog + '#howto').href);
+      await page.waitForFunction(() => {
+        const guide = document.getElementById('howto').getBoundingClientRect();
+        return guide.top >= 82 && guide.top < 180;
+      });
+      await page.goBack();
+      await page.waitForURL(url(catalog + '#/catalog').href);
+      await page.waitForFunction(() => scrollY === 0);
+      const card = page.locator('#assortment .product-card').nth(7);
+      await card.scrollIntoViewIfNeeded();
+      await card.focus();
+      const beforeProduct = await page.evaluate(() => scrollY);
+      assert.ok(beforeProduct > 400);
+      await card.press('Enter');
+      await page.locator('.product-detail').waitFor();
+      await page.goBack();
+      await page.locator('#assortment .product-card').first().waitFor();
+      await page.waitForFunction(position => Math.abs(scrollY - position) < 3, beforeProduct);
+      await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
       if (width === 390) {
         const menu = page.locator('header .aral-menu-toggle');
         await menu.click();
@@ -98,20 +127,48 @@ async function run() {
         assert.equal(await menu.getAttribute('aria-expanded'), 'false');
         await page.locator('.mobile-filter-open').click();
         await page.locator('#filtersPanel.drawer-open').waitFor();
+        assert.ok(await page.locator('dialog[open] #closeFilters').evaluate(button => {
+          const { x, y, width, height } = button.getBoundingClientRect();
+          return button.contains(document.elementFromPoint(x + width / 2, y + height / 2));
+        }));
+        await page.keyboard.press('Escape');
+        assert.equal(await page.locator('#openFilters').evaluate(button => button === document.activeElement), true);
+        await page.locator('.mobile-filter-open').click();
+        const sae = page.locator('#saeFilter');
+        const viscosity = await sae.locator('option').nth(1).getAttribute('value');
+        await sae.selectOption(viscosity);
+        await page.locator('#clearFilters').click();
+        assert.equal(await sae.inputValue(), '');
+        assert.equal(await page.locator('dialog[open]').count(), 1);
         await page.locator('#applyFilters').click();
         await page.locator('#filtersPanel.drawer-open').waitFor({ state: 'detached' });
       }
       await page.locator('.aral-vehicle-chooser [data-vehicle]').first().click();
       await page.locator('.aral-vehicle-chooser [aria-pressed="true"]').click();
-      await page.locator('#searchBox').fill('SuperTronic');
+      await catalogSearch.fill('SuperTronic');
       await page.waitForFunction(() => {
         const cards = document.querySelectorAll('#assortment .product-card');
         return cards.length > 0 && cards.length < 16;
       });
-      await page.locator('#assortment button[data-compare]').first().click();
+      await catalogSearch.fill('');
+      const ids = ['ARAL-001', 'ARAL-006', 'ARAL-013', 'ARAL-015'];
+      for (const id of ids) await page.locator('button[data-compare="' + id + '"]').click();
       await page.locator('header .aral-header-compare').click();
       await page.waitForURL(url(catalog + '#/compare').href);
       await page.locator('#clearCompare').waitFor();
+      const visibleColumns = page.locator('.compare-table thead [data-compare-column]:visible');
+      assert.equal(await visibleColumns.count(), width === 390 ? 2 : 4);
+      assert.equal(await page.locator('#floatingCompare').isVisible(), false);
+      if (width === 390) {
+        await page.locator('[data-pair-slot="0"]').selectOption(ids[2]);
+        await page.locator('[data-pair-slot="1"]').selectOption(ids[3]);
+        assert.deepEqual(await visibleColumns.evaluateAll(columns => columns.map(el => el.dataset.compareColumn)), ids.slice(2));
+        assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('aralProductsV13Compare'))), ids);
+        assert.ok(await page.locator('.compare-table-wrap').evaluate(el => el.scrollWidth <= el.clientWidth + 1));
+        await page.emulateMedia({ media: 'print' });
+        assert.equal(await visibleColumns.count(), 4);
+        await page.emulateMedia({ media: 'screen' });
+      }
 
       await visit(section('contacts') + '#contacts-stores', '#contacts-stores .cc-tab');
       const region = page.locator('#contacts-stores .cc-tab').nth(1);

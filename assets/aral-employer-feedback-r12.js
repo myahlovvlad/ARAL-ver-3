@@ -85,7 +85,9 @@
   ['О бренде',routes.company,'company'],
   ['Где купить',routes.contacts,'contacts'],
   ['Сотрудничество',routes.partners,'partners'],
-  ['Преимущества ARAL',routes.advantages,'advantages']
+  ['Преимущества ARAL',routes.advantages,'advantages'],
+  ['Для водителей',routes.drivers,'drivers'],
+  ['Интересное',routes.interesting,'interesting']
  ];
  function rewriteInternalLinks(){
   const rootPath=ROOT.pathname;
@@ -106,16 +108,27 @@
  function installHeader(){
   const headers=[...document.querySelectorAll('header.home-nav,header.site-header,header.nav')];
   headers.forEach(header=>{
-   const brand=header.querySelector('a.home-brand,a.brand');
+   const row=header.querySelector('.home-nav-inner,.nav-row,.nav-wrap');
+   header.classList.add('aral-header-shell');
+   row?.classList.add('aral-header-row');
+   let brand=header.querySelector('.home-brand,.brand');
+   if(brand && !(brand instanceof HTMLAnchorElement)){
+    const link=document.createElement('a');
+    link.className=brand.className;
+    brand.replaceWith(link);
+    brand=link;
+   }
    if(brand){
-    brand.href=routes.home;brand.setAttribute('aria-label','ARAL — на главную с HERO-анимацией');
+    brand.href=routes.home;brand.setAttribute('aria-label','ARAL — на главную');
     brand.classList.add('aral-preview-brand');
     brand.innerHTML='<img src="'+to('assets/aral-logo-header-r9.svg')+'" alt="Логотип ARAL" width="64" height="64" decoding="async">';
+    const toggle=header.querySelector('.home-menu-toggle,.nav-toggle,.mobile-toggle');
+    if(toggle)brand.after(toggle);
    }
    const nav=header.querySelector('nav.home-menu,nav.navlinks,nav.menu');
    if(!nav)return;
-   const path=location.pathname;
-   const current=path.includes('products-')?'products':path.includes('partners-')?'partners':path.includes('advantages-')?'advantages':path.includes('contacts-')?'contacts':path.includes('index-employer-')?'company':null;
+   const current=header.closest('[data-route]')?.dataset.route
+     ?? (header.classList.contains('site-header')?'products':null);
    nav.setAttribute('aria-label','Основные разделы ARAL');
    nav.classList.add('aral-jelly-menu');
    nav.innerHTML=menu.map(([name,url,key])=>'<a class="aral-jelly-chip" data-aral-nav="'+key+'" href="'+url+'"'+(current===key?' aria-current="page"':'')+'><span>'+name+'</span></a>').join('');
@@ -136,9 +149,8 @@
   document.querySelectorAll('header.home-nav,header.site-header,header.nav').forEach(header=>{
    let tools=header.querySelector('.home-nav-tools,.navtools');
    if(!tools){tools=document.createElement('div');tools.className='aral-header-actions';header.querySelector('.home-nav-inner,.nav-row,.nav-wrap').appendChild(tools)}
-   let product=tools.querySelector('.home-catalog-cta,.primary-link');
-   if(!product){product=document.createElement('a');product.textContent='Продукция';tools.prepend(product)}
-   product.href=routes.products;product.classList.add('aral-header-control','aral-header-product');product.dataset.magnetic='header-products';
+   tools.classList.add('aral-header-actions');
+   tools.querySelector('.home-catalog-cta,.primary-link')?.remove();
    let compare=tools.querySelector('.home-compare-link,#headerCompare');
    if(!compare){compare=document.createElement('a');compare.innerHTML='Сравнение <span class="aral-header-count">0</span>';tools.appendChild(compare)}
    compare.href=compareUrl.href;compare.classList.add('aral-header-control','aral-header-compare');compare.dataset.magnetic='header-compare';
@@ -146,7 +158,10 @@
   });
   const syncCounts=()=>{
    let count=0;try{const values=JSON.parse(localStorage.getItem('aralProductsV13Compare')||'[]');if(Array.isArray(values))count=values.filter(v=>typeof v==='string').slice(0,4).length}catch{}
-   document.querySelectorAll('.aral-header-count').forEach(el=>el.textContent=String(count));
+   document.querySelectorAll('.aral-header-count').forEach(el=>{
+    el.textContent=String(count);
+    el.hidden=count===0;
+   });
   };
   syncCounts();window.addEventListener('focus',syncCounts);window.addEventListener('storage',e=>{if(e.key==='aralProductsV13Compare')syncCounts()});
  }
@@ -251,7 +266,7 @@
 
   for(const button of document.querySelectorAll('.home-menu-toggle,.nav-toggle,.mobile-toggle')){
    button.classList.add('aral-menu-toggle');
-   button.innerHTML='<span class="aral-menu-label">МЕНЮ</span>';
+   button.innerHTML='<span class="aral-menu-label">Меню</span>';
    const label=()=>button.setAttribute('aria-label',button.getAttribute('aria-expanded')==='true'?'Закрыть меню':'Открыть меню');
    label();new MutationObserver(label).observe(button,{attributes:true,attributeFilter:['aria-expanded']});
    const header=button.closest('header');

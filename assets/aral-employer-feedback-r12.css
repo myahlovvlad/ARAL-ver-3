@@ -510,7 +510,6 @@ body header:is(.home-nav,.site-header,.nav){
 body header a.aral-header-control{border-color:#a8dcff!important;box-shadow:0 0 16px #96ddff2b,inset 0 1px 0 #fff!important;background:linear-gradient(135deg,#fff,#eaf6ff)!important}
 body header nav.aral-jelly-menu a.aral-jelly-chip{border-color:#8ccfff55!important}
 @media(max-width:1200px){body header nav.aral-jelly-menu:is(.open,.is-open) a.aral-jelly-chip{border:0!important}}
-@media(max-width:900px){body.filters-locked>main{position:relative;z-index:1000!important}}
 
 /* R12.8: remove reviewed decorative arrows and use a dash in the brand footnote. */
 .aral-global-footer .af-lead .aral-r3-dot-link::before{content:"—";width:auto!important;height:auto!important;min-width:0!important;min-height:0!important;border-radius:0!important;background:none!important;top:0!important}
